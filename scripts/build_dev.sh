@@ -18,10 +18,18 @@ swift build -c "$CONFIGURATION"
 rm -rf "$APP_DIR"
 mkdir -p "$MACOS_DIR" "$RESOURCES_DIR"
 cp ".build/$CONFIGURATION/$PRODUCT_NAME" "$MACOS_DIR/$PRODUCT_NAME"
-cp "$ROOT_DIR/Sources/LocalAI/Resources/foundationmodel-96x96_2x.png" "$RESOURCES_DIR/"
-rm -rf "$ICONSET_DIR"
-swift "$ROOT_DIR/scripts/generate_icon.swift" "$ICONSET_DIR"
-iconutil -c icns "$ICONSET_DIR" -o "$ICON_FILE"
+if [ -f "$ROOT_DIR/Sources/LocalAI/Resources/foundationmodel-96x96_2x.png" ]; then
+  cp "$ROOT_DIR/Sources/LocalAI/Resources/foundationmodel-96x96_2x.png" "$RESOURCES_DIR/"
+fi
+
+if [ -f "$ROOT_DIR/scripts/generate_icon.swift" ]; then
+  rm -rf "$ICONSET_DIR"
+  swift "$ROOT_DIR/scripts/generate_icon.swift" "$ICONSET_DIR" || true
+  if [ -d "$ICONSET_DIR" ]; then
+    iconutil -c icns "$ICONSET_DIR" -o "$ICON_FILE" || true
+    rm -rf "$ICONSET_DIR"
+  fi
+fi
 
 cat > "$APP_DIR/Contents/Info.plist" <<PLIST
 <?xml version="1.0" encoding="UTF-8"?>
@@ -38,8 +46,6 @@ cat > "$APP_DIR/Contents/Info.plist" <<PLIST
   <string>AFM Local AI</string>
   <key>CFBundlePackageType</key>
   <string>APPL</string>
-  <key>CFBundleIconFile</key>
-  <string>LocalAI</string>
   <key>CFBundleShortVersionString</key>
   <string>$VERSION</string>
   <key>CFBundleVersion</key>
