@@ -2,6 +2,8 @@
 
 AFM Local AI is a native, local-first macOS AI notebook. Open a local folder as your workspace, choose which files to include in context, and chat with an on-device model — all while keeping your data on your machine.
 
+[![Download DMG](https://img.shields.io/badge/Download-DMG-blue?style=for-the-badge&logo=apple)](https://github.com/mayeenulislam/afm-local-ai/releases/download/v0.1.0/AFM.Local.AI.0.1.0.dmg)
+
 ## Screenshots
 
 ![AFM Local AI Landing Page](docs/01-afm-local-ai-landing-page.png)
@@ -24,6 +26,12 @@ AFM Local AI is a native, local-first macOS AI notebook. Open a local folder as 
 - **Built-in Tools** — Summarize, Extract Actions, Organize Files, Explain Codebase, and Extract to JSON
 - **Local-First** — Your files stay on your machine. No network connection required by default
 - **Granular Permissions** — Control read/write/delete/shell/network access per workspace
+
+## Installation
+
+1. Download the DMG using the button above
+2. Open the DMG and drag **AFM Local AI** to **Applications**
+3. On first launch, right-click → **Open** if macOS shows a Gatekeeper warning
 
 ## Build
 
